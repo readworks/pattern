@@ -148,7 +148,7 @@ setup(
         "cherrypy" if sys.version >= "3" else "cherrypy==17.4.1",
         "requests"
     ],
-    extra_requires = {
+    extras_require = {
         'mysql': ["mysqlclient"],
     },
     zip_safe = False

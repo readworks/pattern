@@ -137,7 +137,6 @@ setup(
     install_requires = [
         "future",
         "backports.csv",
-        "mysqlclient",
         "beautifulsoup4",
         "lxml",
         "feedparser",
@@ -149,5 +148,8 @@ setup(
         "cherrypy" if sys.version >= "3" else "cherrypy==17.4.1",
         "requests"
     ],
+    extras_require = {
+        'mysql': ["mysqlclient"],
+    },
     zip_safe = False
 )

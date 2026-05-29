@@ -51,7 +51,7 @@ if sys.argv[-1] == "zip":
 
 setup(
             name = "Pattern",
-         version = "3.6",
+         version = "3.6.1",
      description = "Web mining module for Python.",
          license = "BSD",
           author = "Tom De Smedt",
@@ -137,17 +137,19 @@ setup(
     install_requires = [
         "future",
         "backports.csv",
-        "mysqlclient",
         "beautifulsoup4",
         "lxml",
         "feedparser",
         "pdfminer" if sys.version < "3" else "pdfminer.six",
         "numpy",
-        "scipy",
+        "scipy" if sys.version >= "3" else "scipy==1.2.1",
         "nltk",
         "python-docx",
-        "cherrypy",
+        "cherrypy" if sys.version >= "3" else "cherrypy==17.4.1",
         "requests"
     ],
+    extras_require = {
+        'mysql': ["mysqlclient"],
+    },
     zip_safe = False
 )

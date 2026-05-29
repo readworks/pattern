@@ -354,7 +354,7 @@ quantify = count
 
 readable_types = (
     ("^<type '"        , ""),
-    ("^<class '(.*)'\>", "\\1 class"),
+    (r"^<class '(.*)'\>", "\\1 class"),
     ("'>"              , ""),
     ("pyobjc"          , "PyObjC"),
     ("objc_class"      , "Objective-C class"),
@@ -371,7 +371,7 @@ readable_types = (
     ("instancemethod"  , "instance method"),
     ("builtin_function_or_method" , "built-in function"),
     ("classobj"        , "class object"),
-    ("\."              , " "),
+    (r"\."              , " "),
     ("_"               , " ")
 )
 

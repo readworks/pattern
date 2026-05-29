@@ -282,6 +282,15 @@ class Verbs(_Verbs):
         # Spanish has 12,000+ verbs, ending in -ar (85%), -er (8%), -ir (7%).
         # Over 65% of -ar verbs (6500+) have a regular inflection.
         v = verb.lower()
+        # Strip clitic pronouns attached to infinitives and gerunds:
+        # construirlo => construir, haciéndose => haciéndo
+        for clitic in ("selo", "sela", "selos", "selas",
+                       "melo", "mela", "melos", "melas",
+                       "telo", "tela", "telos", "telas",
+                       "nos", "les", "los", "las", "me", "te", "se", "lo", "la", "le"):
+            if v.endswith(clitic) and len(v) > len(clitic) + 2:
+                v = v[:-len(clitic)]
+                break
         # Probably ends in -ir if preceding vowel in stem is -i.
         er_ir = lambda b: (len(b) > 2 and b[-2] == "i") and b + "ir" or b + "er"
         # Probably infinitive if ends in -ar, -er or -ir.
@@ -305,7 +314,7 @@ class Verbs(_Verbs):
             return v[:v.index("ndr") + 1] + "er"
         # Many verbs end in -ar and have a regular inflection:
         for x in ((
-          "ando", "ado", "ad",                                # participle
+          "ando", "ados", "adas", "ado", "ada", "ad",        # participle
           "aré", "arás", "ará", "aremos", "aréis", "arán", # future
           "aría", "arías", "aríamos", "aríais", "arían",    # conditional
           "aba", "abas", "ábamos", "abais", "aban",         # past imperfective
@@ -315,7 +324,7 @@ class Verbs(_Verbs):
                 return v[:-len(x)] + "ar"
         # Many verbs end in -er and have a regular inflection:
         for x in ((
-          "iendo", "ido", "ed",                               # participle
+          "iendo", "idos", "idas", "ido", "ida", "ed",         # participle
           "eré", "erás", "erá", "eremos", "eréis", "erán", # future
           "ería", "erías", "eríamos", "eríais", "erían",    # conditional
           "ía", "ías", "íamos", "íais", "ían",              # past imperfective
